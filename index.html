@@ -726,7 +726,8 @@
                 [0, 1, 2], [3, 4, 5], [6, 7, 8], // rows
                 [0, 3, 6], [1, 4, 7], [2, 5, 8], // columns
                 [0, 4, 8], [2, 4, 6]             // diagonals
-            ]
+            ],
+            gamesPlayed: 0 // Track number of games to reduce ad frequency
         };
         
         // DOM Elements
@@ -956,12 +957,21 @@
             // Play win sound
             playSound('win');
             
-            // Show interstitial ad before showing results
-            showInterstitialAd(() => {
+            // Increment games played counter
+            gameState.gamesPlayed++;
+            
+            // Show interstitial ad only every 3 games
+            if (gameState.gamesPlayed % 3 === 0) {
+                showInterstitialAd(() => {
+                    modalTitle.textContent = `Player ${winner} Wins!`;
+                    modalMessage.textContent = winner === 'X' ? 'Congratulations on your victory!' : 'The AI has defeated you!';
+                    resultsModal.style.display = 'flex';
+                });
+            } else {
                 modalTitle.textContent = `Player ${winner} Wins!`;
                 modalMessage.textContent = winner === 'X' ? 'Congratulations on your victory!' : 'The AI has defeated you!';
                 resultsModal.style.display = 'flex';
-            });
+            }
         }
         
         // Handle draw
@@ -971,12 +981,21 @@
             // Play draw sound
             playSound('draw');
             
-            // Show interstitial ad before showing results
-            showInterstitialAd(() => {
+            // Increment games played counter
+            gameState.gamesPlayed++;
+            
+            // Show interstitial ad only every 3 games
+            if (gameState.gamesPlayed % 3 === 0) {
+                showInterstitialAd(() => {
+                    modalTitle.textContent = 'Game Draw!';
+                    modalMessage.textContent = 'No one wins this round. Try again!';
+                    resultsModal.style.display = 'flex';
+                });
+            } else {
                 modalTitle.textContent = 'Game Draw!';
                 modalMessage.textContent = 'No one wins this round. Try again!';
                 resultsModal.style.display = 'flex';
-            });
+            }
         }
         
         // Show interstitial ad with callback
@@ -1041,18 +1060,34 @@
             renderBoard();
             resultsModal.style.display = 'none';
             
-            // Show interstitial ad when starting a new game
-            showInterstitialAd(() => {
-                // Ad closed, game starts
-            });
+            // Show interstitial ad only when starting a new game after 3 games played
+            if (gameState.gamesPlayed > 0 && gameState.gamesPlayed % 3 === 0) {
+                showInterstitialAd(() => {
+                    // Ad closed, game starts
+                });
+            }
         }
         
         // Start game
         function startGame(mode) {
             gameState.gameMode = mode;
             
-            // Show interstitial ad when starting a new game
-            showInterstitialAd(() => {
+            // Show interstitial ad only when starting a new game after 3 games played
+            if (gameState.gamesPlayed > 0 && gameState.gamesPlayed % 3 === 0) {
+                showInterstitialAd(() => {
+                    resetGame();
+                    
+                    // Show/hide difficulty selector based on mode
+                    if (mode === 'single') {
+                        difficultySelector.style.display = 'flex';
+                    } else {
+                        difficultySelector.style.display = 'none';
+                    }
+                    
+                    homeScreen.style.display = 'none';
+                    gameScreen.style.display = 'flex';
+                });
+            } else {
                 resetGame();
                 
                 // Show/hide difficulty selector based on mode
@@ -1064,7 +1099,7 @@
                 
                 homeScreen.style.display = 'none';
                 gameScreen.style.display = 'flex';
-            });
+            }
         }
         
         // Play sound effects
@@ -1084,18 +1119,27 @@
         });
         
         restartBtn.addEventListener('click', () => {
-            // Show interstitial ad when restarting
-            showInterstitialAd(() => {
+            // Show interstitial ad only when restarting after 3 games played
+            if (gameState.gamesPlayed > 0 && gameState.gamesPlayed % 3 === 0) {
+                showInterstitialAd(() => {
+                    resetGame();
+                });
+            } else {
                 resetGame();
-            });
+            }
         });
         
         modalRestartBtn.addEventListener('click', () => {
-            // Show interstitial ad when restarting from modal
-            showInterstitialAd(() => {
+            // Show interstitial ad only when restarting after 3 games played
+            if (gameState.gamesPlayed > 0 && gameState.gamesPlayed % 3 === 0) {
+                showInterstitialAd(() => {
+                    resetGame();
+                    resultsModal.style.display = 'none';
+                });
+            } else {
                 resetGame();
                 resultsModal.style.display = 'none';
-            });
+            }
         });
         
         modalHomeBtn.addEventListener('click', () => {
