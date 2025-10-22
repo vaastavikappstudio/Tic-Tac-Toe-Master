@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Tic Tac Toe Master - Tablet Edition</title>
+    <title>Tic Tac Toe Master</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700;800&family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
     <style>
@@ -36,22 +36,81 @@
             overflow-x: hidden;
             background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
             background-attachment: fixed;
-            justify-content: center;
-            align-items: center;
         }
         
         .container {
-            width: 90%;
-            max-width: 1000px;
-            height: 90vh;
-            max-height: 1200px;
+            width: 100%;
+            max-width: 1200px;
             margin: 0 auto;
-            padding: 30px;
+            padding: 20px;
             display: flex;
             flex-direction: column;
+            min-height: 100vh;
             position: relative;
         }
 
+        /* Tablet and Desktop Layout */
+        @media (min-width: 768px) {
+            .container {
+                padding: 30px;
+            }
+            
+            .home-screen {
+                max-width: 600px;
+                margin: 0 auto;
+            }
+            
+            .game-screen {
+                max-width: 800px;
+                margin: 0 auto;
+                width: 100%;
+            }
+            
+            .game-board {
+                max-width: 600px;
+                margin: 30px auto;
+            }
+        }
+
+        /* Large Tablets and Small Desktops */
+        @media (min-width: 1024px) {
+            .container {
+                padding: 40px;
+            }
+            
+            .home-screen {
+                max-width: 700px;
+            }
+            
+            .game-screen {
+                max-width: 900px;
+            }
+            
+            .game-board {
+                max-width: 700px;
+            }
+        }
+
+        /* Large Desktops */
+        @media (min-width: 1440px) {
+            .container {
+                max-width: 1400px;
+                padding: 50px;
+            }
+            
+            .home-screen {
+                max-width: 800px;
+            }
+            
+            .game-screen {
+                max-width: 1000px;
+            }
+            
+            .game-board {
+                max-width: 800px;
+            }
+        }
+        
         /* Home Screen Styles */
         .home-screen {
             display: flex;
@@ -59,7 +118,7 @@
             align-items: center;
             justify-content: center;
             flex: 1;
-            padding: 40px;
+            padding: 20px;
             text-align: center;
             position: relative;
             z-index: 10;
@@ -67,7 +126,7 @@
         }
         
         .logo-container {
-            margin-bottom: 60px;
+            margin-bottom: 40px;
             position: relative;
         }
         
@@ -76,16 +135,16 @@
             top: 50%;
             left: 50%;
             transform: translate(-50%, -50%);
-            width: 300px;
-            height: 300px;
+            width: 200px;
+            height: 200px;
             background: radial-gradient(circle, rgba(255,193,7,0.2) 0%, rgba(255,193,7,0) 70%);
             border-radius: 50%;
             z-index: -1;
         }
         
         .title {
-            font-size: 4.5rem;
-            margin-bottom: 20px;
+            font-size: clamp(2.2rem, 5vw, 3.5rem);
+            margin-bottom: 10px;
             background: linear-gradient(45deg, #FFC107, #FF9800);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
@@ -98,21 +157,21 @@
         
         .subtitle {
             color: var(--text-secondary);
-            margin-bottom: 60px;
-            font-size: 1.8rem;
+            margin-bottom: 40px;
+            font-size: clamp(1rem, 2.5vw, 1.3rem);
         }
         
         .btn {
             background-color: var(--secondary);
             color: var(--text);
             border: none;
-            border-radius: 20px;
-            padding: 25px 40px;
-            font-size: 1.8rem;
+            border-radius: 15px;
+            padding: clamp(16px, 4vw, 22px) clamp(24px, 5vw, 36px);
+            font-size: clamp(1.1rem, 3vw, 1.4rem);
             font-weight: 600;
-            margin: 20px 0;
+            margin: 12px 0;
             width: 100%;
-            max-width: 450px;
+            max-width: 400px;
             cursor: pointer;
             transition: all 0.3s ease;
             box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
@@ -121,7 +180,7 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            gap: 15px;
+            gap: 12px;
             z-index: 2;
         }
         
@@ -175,20 +234,20 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
-            padding: 20px 0;
+            padding: 15px 0;
         }
         
         .back-btn, .restart-btn {
             background-color: var(--secondary);
             color: var(--text);
             border: none;
-            border-radius: 15px;
-            padding: 18px 28px;
-            font-size: 1.5rem;
+            border-radius: 12px;
+            padding: clamp(10px, 2.5vw, 14px) clamp(16px, 3vw, 22px);
+            font-size: clamp(0.9rem, 2.5vw, 1.1rem);
             cursor: pointer;
             display: flex;
             align-items: center;
-            gap: 12px;
+            gap: 8px;
             transition: all 0.3s ease;
             box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
         }
@@ -199,46 +258,62 @@
         }
         
         .game-status {
-            font-size: 2.2rem;
+            font-size: clamp(1.2rem, 4vw, 1.8rem);
             font-weight: 600;
             text-align: center;
-            padding: 25px 0;
-            min-height: 80px;
+            padding: 20px 0;
+            min-height: 60px;
             display: flex;
             align-items: center;
             justify-content: center;
             color: var(--accent);
             background: rgba(30, 30, 46, 0.5);
-            border-radius: 20px;
-            margin: 15px 0;
+            border-radius: 15px;
+            margin: 10px 0;
             box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
         }
         
         .game-board {
             display: grid;
             grid-template-columns: repeat(3, 1fr);
-            grid-gap: 25px;
-            margin: 30px 0;
+            grid-gap: clamp(10px, 3vw, 20px);
+            margin: 20px 0;
             background: rgba(26, 26, 46, 0.7);
-            padding: 30px;
-            border-radius: 25px;
+            padding: clamp(15px, 4vw, 25px);
+            border-radius: 20px;
             box-shadow: 0 8px 30px rgba(0, 0, 0, 0.3);
             position: relative;
             width: 100%;
-            max-width: 700px;
+            max-width: 500px;
             margin-left: auto;
             margin-right: auto;
-            flex: 1;
+        }
+
+        /* Tablet and Desktop Game Board Sizes */
+        @media (min-width: 768px) {
+            .game-board {
+                max-width: 600px;
+                grid-gap: 20px;
+                padding: 25px;
+            }
+        }
+
+        @media (min-width: 1024px) {
+            .game-board {
+                max-width: 700px;
+                grid-gap: 25px;
+                padding: 30px;
+            }
         }
         
         .cell {
             background-color: var(--cell-bg);
-            border-radius: 20px;
+            border-radius: 15px;
             aspect-ratio: 1/1;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 5.5rem;
+            font-size: clamp(2.5rem, 10vw, 5rem);
             font-weight: bold;
             cursor: pointer;
             transition: all 0.2s ease;
@@ -290,8 +365,8 @@
         .difficulty-selector {
             display: flex;
             justify-content: center;
-            gap: 20px;
-            margin: 20px 0;
+            gap: clamp(10px, 2vw, 15px);
+            margin: 15px 0;
             flex-wrap: wrap;
         }
         
@@ -299,9 +374,9 @@
             background-color: var(--secondary);
             color: var(--text);
             border: none;
-            border-radius: 15px;
-            padding: 18px 30px;
-            font-size: 1.5rem;
+            border-radius: 12px;
+            padding: clamp(10px, 2.5vw, 14px) clamp(16px, 3vw, 24px);
+            font-size: clamp(0.9rem, 2.5vw, 1.1rem);
             cursor: pointer;
             transition: all 0.3s ease;
             box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
@@ -315,6 +390,99 @@
             background: linear-gradient(45deg, #FFC107, #FF9800);
             color: #121212;
             font-weight: 600;
+        }
+        
+        /* Ad Containers */
+        .ad-container {
+            margin-top: auto;
+            padding: 15px 0;
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 15px;
+        }
+        
+        .social-bar-ad {
+            width: 100%;
+            max-width: 728px;
+            height: 90px;
+            margin: 0 auto;
+            background: #1a1a2e;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--text-secondary);
+            font-weight: 500;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+            overflow: hidden;
+            position: relative;
+        }
+        
+        .smart-link-ad {
+            width: 100%;
+            max-width: 320px;
+            height: 100px;
+            margin: 0 auto;
+            background: #1a1a2e;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--text-secondary);
+            font-weight: 500;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+            overflow: hidden;
+            position: relative;
+        }
+        
+        .ad-label {
+            position: absolute;
+            top: 5px;
+            right: 10px;
+            background: rgba(255, 193, 7, 0.2);
+            color: var(--accent);
+            padding: 2px 8px;
+            border-radius: 10px;
+            font-size: 0.7rem;
+            font-weight: 600;
+        }
+        
+        .ad-content {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            padding: 10px;
+        }
+        
+        .ad-icon {
+            font-size: 1.5rem;
+            color: var(--accent);
+        }
+        
+        /* Mobile-specific ad styles */
+        @media (max-width: 767px) {
+            .social-bar-ad {
+                height: 70px;
+                max-width: 100%;
+            }
+            
+            .smart-link-ad {
+                height: 80px;
+                max-width: 300px;
+            }
+            
+            .ad-content {
+                flex-direction: column;
+                gap: 5px;
+                text-align: center;
+            }
+            
+            .ad-icon {
+                font-size: 1.2rem;
+            }
         }
         
         /* Results Modal */
@@ -334,11 +502,11 @@
         
         .modal-content {
             background: linear-gradient(135deg, #1e1e2a 0%, #252536 100%);
-            border-radius: 25px;
-            padding: 50px 40px;
+            border-radius: 20px;
+            padding: clamp(25px, 5vw, 40px) clamp(20px, 4vw, 30px);
             text-align: center;
             max-width: 90%;
-            width: 600px;
+            width: clamp(300px, 80vw, 500px);
             box-shadow: 0 15px 40px rgba(0, 0, 0, 0.5);
             animation: modalIn 0.4s ease;
             border: 1px solid rgba(255, 193, 7, 0.2);
@@ -362,23 +530,23 @@
         }
         
         .modal-title {
-            font-size: 3rem;
-            margin-bottom: 20px;
+            font-size: clamp(1.8rem, 5vw, 2.5rem);
+            margin-bottom: 15px;
             color: var(--accent);
             font-family: 'Montserrat', sans-serif;
         }
         
         .modal-message {
-            font-size: 1.8rem;
-            margin-bottom: 40px;
+            font-size: clamp(1rem, 3vw, 1.3rem);
+            margin-bottom: 30px;
             color: var(--text-secondary);
         }
         
         .modal-buttons {
             display: flex;
             justify-content: center;
-            gap: 20px;
-            margin-top: 20px;
+            gap: 15px;
+            margin-top: 15px;
             flex-wrap: wrap;
         }
         
@@ -405,61 +573,50 @@
             100% { transform: translateY(-100vh) translateX(100px) rotate(360deg); }
         }
         
-        /* Tablet-specific optimizations */
-        @media (max-width: 1024px) and (min-width: 768px) {
-            .container {
-                width: 95%;
-                padding: 20px;
-            }
-            
-            .title {
-                font-size: 4rem;
-            }
-            
-            .subtitle {
-                font-size: 1.6rem;
-            }
-            
-            .btn {
-                font-size: 1.6rem;
-                padding: 22px 35px;
-            }
-            
-            .game-board {
-                max-width: 600px;
-                grid-gap: 20px;
-            }
-            
-            .cell {
-                font-size: 4.5rem;
-            }
-        }
-        
-        /* Portrait orientation adjustments */
-        @media (max-height: 1024px) and (orientation: portrait) {
-            .container {
-                height: 95vh;
-            }
-            
+        /* Landscape Orientation for Tablets */
+        @media (max-height: 600px) and (orientation: landscape) {
             .home-screen {
-                padding: 20px;
+                padding: 10px 20px;
             }
             
             .logo-container {
-                margin-bottom: 40px;
+                margin-bottom: 20px;
             }
             
             .title {
-                font-size: 3.5rem;
+                margin-bottom: 5px;
             }
             
             .subtitle {
-                margin-bottom: 40px;
-                font-size: 1.5rem;
+                margin-bottom: 20px;
             }
             
             .btn {
-                margin: 15px 0;
+                margin: 8px 0;
+                padding: 12px 24px;
+            }
+            
+            .game-status {
+                padding: 10px 0;
+                min-height: 40px;
+                margin: 5px 0;
+            }
+            
+            .game-board {
+                margin: 10px 0;
+                padding: 15px;
+            }
+            
+            .ad-container {
+                padding: 10px 0;
+            }
+            
+            .social-bar-ad {
+                height: 60px;
+            }
+            
+            .smart-link-ad {
+                height: 70px;
             }
         }
     </style>
@@ -484,6 +641,20 @@
             <button class="btn" id="twoPlayerBtn">
                 <i class="fas fa-user-friends"></i> Two Player
             </button>
+            
+            <!-- Ad Container on Home Screen -->
+            <div class="ad-container">
+                <div class="smart-link-ad">
+                    <span class="ad-label">Ad</span>
+                    <div class="ad-content">
+                        <i class="fas fa-link ad-icon"></i>
+                        <div>
+                            <div>Discover Amazing Games</div>
+                            <div style="font-size: 0.8rem;">Tap to explore</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
         
         <!-- Game Screen -->
@@ -510,6 +681,31 @@
             
             <div class="game-board" id="gameBoard">
                 <!-- Cells will be generated by JavaScript -->
+            </div>
+            
+            <!-- Ad Container on Game Screen -->
+            <div class="ad-container">
+                <div class="social-bar-ad">
+                    <span class="ad-label">Ad</span>
+                    <div class="ad-content">
+                        <i class="fas fa-gamepad ad-icon"></i>
+                        <div>
+                            <div>Play More Strategy Games</div>
+                            <div style="font-size: 0.8rem;">Challenge your mind</div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="smart-link-ad">
+                    <span class="ad-label">Ad</span>
+                    <div class="ad-content">
+                        <i class="fas fa-trophy ad-icon"></i>
+                        <div>
+                            <div>Win Exciting Prizes</div>
+                            <div style="font-size: 0.8rem;">Tap to play</div>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
@@ -846,6 +1042,7 @@
         // Start game
         function startGame(mode) {
             gameState.gameMode = mode;
+            
             resetGame();
             
             // Show/hide difficulty selector based on mode
@@ -875,7 +1072,9 @@
             gameScreen.style.display = 'none';
         });
         
-        restartBtn.addEventListener('click', resetGame);
+        restartBtn.addEventListener('click', () => {
+            resetGame();
+        });
         
         modalRestartBtn.addEventListener('click', () => {
             resetGame();
@@ -902,6 +1101,49 @@
         // Initialize the board and particles
         initBoard();
         initParticles();
+        
+        // Adsterra Ads Integration
+        function loadAdsterraAds() {
+            // Social Bar Ad (Replace with your actual Adsterra Social Bar Ad ID)
+            const socialBarAd = document.createElement('script');
+            socialBarAd.type = 'text/javascript';
+            socialBarAd.innerHTML = `
+                atOptions = {
+                    'key' : '<script type='text/javascript' src='//pl27905276.effectivegatecpm.com/4f/30/0d/4f300dbaa4c0c6de34aa311b6b45ef6e.js'></script>', // Replace with your actual Adsterra Social Bar Ad ID
+                    'format' : 'iframe',
+                    'height' : 90,
+                    'width' : 728,
+                    'params' : {}
+                };
+            `;
+            document.head.appendChild(socialBarAd);
+            
+            const socialBarScript = document.createElement('script');
+            socialBarScript.type = 'text/javascript';
+            socialBarScript.src = '//www.highperformancedformats.com/<script type='text/javascript' src='//pl27905276.effectivegatecpm.com/4f/30/0d/4f300dbaa4c0c6de34aa311b6b45ef6e.js'></script>.js';
+            document.head.appendChild(socialBarScript);
+        
+            const smartLinkAd = document.createElement('script');
+            smartLinkAd.type = 'text/javascript';
+            smartLinkAd.innerHTML = `
+                atOptions = {
+                    'key' : 'https://www.effectivegatecpm.com/wqc66wj1ef?key=bfd46e317ce2cef1a909c83de4b78bd0', // Replace with your actual Adsterra Smart Link Ad ID
+                    'format' : 'iframe',
+                    'height' : 100,
+                    'width' : 320,
+                    'params' : {}
+                };
+            `;
+            document.head.appendChild(smartLinkAd);
+            
+            const smartLinkScript = document.createElement('script');
+            smartLinkScript.type = 'text/javascript';
+            smartLinkScript.src = '//www.highperformancedformats.com/https://www.effectivegatecpm.com/wqc66wj1ef?key=bfd46e317ce2cef1a909c83de4b78bd0/invoke.js';
+            document.head.appendChild(smartLinkScript);
+        }
+        
+        // Load ads after page is fully loaded
+        window.addEventListener('load', loadAdsterraAds);
     </script>
 </body>
 </html>
