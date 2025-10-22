@@ -644,7 +644,8 @@
             
             <!-- Ad Container on Home Screen -->
             <div class="ad-container">
-                <div class="smart-link-ad">
+                <!-- Smart Link Ad Container -->
+                <div class="smart-link-ad" id="smartLinkAdHome">
                     <span class="ad-label">Ad</span>
                     <div class="ad-content">
                         <i class="fas fa-link ad-icon"></i>
@@ -685,7 +686,8 @@
             
             <!-- Ad Container on Game Screen -->
             <div class="ad-container">
-                <div class="social-bar-ad">
+                <!-- Social Bar Ad Container -->
+                <div class="social-bar-ad" id="socialBarAd">
                     <span class="ad-label">Ad</span>
                     <div class="ad-content">
                         <i class="fas fa-gamepad ad-icon"></i>
@@ -696,7 +698,8 @@
                     </div>
                 </div>
                 
-                <div class="smart-link-ad">
+                <!-- Smart Link Ad Container -->
+                <div class="smart-link-ad" id="smartLinkAdGame">
                     <span class="ad-label">Ad</span>
                     <div class="ad-content">
                         <i class="fas fa-trophy ad-icon"></i>
@@ -803,9 +806,6 @@
             gameState.board[index] = gameState.currentPlayer;
             renderBoard();
             
-            // Play move sound
-            playSound('move');
-            
             // Check for win or draw
             if (checkWin()) {
                 handleWin();
@@ -845,9 +845,6 @@
             if (move !== -1) {
                 gameState.board[move] = 'O';
                 renderBoard();
-                
-                // Play move sound
-                playSound('move');
                 
                 if (checkWin()) {
                     handleWin();
@@ -986,9 +983,6 @@
             gameState.gameActive = false;
             const winner = gameState.currentPlayer;
             
-            // Play win sound
-            playSound('win');
-            
             modalTitle.textContent = `Player ${winner} Wins!`;
             modalMessage.textContent = winner === 'X' ? 'Congratulations on your victory!' : 'The AI has defeated you!';
             resultsModal.style.display = 'flex';
@@ -997,9 +991,6 @@
         // Handle draw
         function handleDraw() {
             gameState.gameActive = false;
-            
-            // Play draw sound
-            playSound('draw');
             
             modalTitle.textContent = 'Game Draw!';
             modalMessage.textContent = 'No one wins this round. Try again!';
@@ -1056,13 +1047,6 @@
             gameScreen.style.display = 'flex';
         }
         
-        // Play sound effects
-        function playSound(type) {
-            // In a real app, we would play actual sound files
-            // This is a simulation
-            console.log(`Playing ${type} sound`);
-        }
-        
         // Event Listeners
         singlePlayerBtn.addEventListener('click', () => startGame('single'));
         twoPlayerBtn.addEventListener('click', () => startGame('two'));
@@ -1104,7 +1088,7 @@
         
         // Adsterra Ads Integration
         function loadAdsterraAds() {
-            // Social Bar Ad (Replace with your actual Adsterra Social Bar Ad ID)
+            // Social Bar Ad - Replace with your actual Adsterra Social Bar Ad ID
             const socialBarAd = document.createElement('script');
             socialBarAd.type = 'text/javascript';
             socialBarAd.innerHTML = `
@@ -1120,9 +1104,10 @@
             
             const socialBarScript = document.createElement('script');
             socialBarScript.type = 'text/javascript';
-            socialBarScript.src = '//www.highperformancedformats.com/<script type='text/javascript' src='//pl27905276.effectivegatecpm.com/4f/30/0d/4f300dbaa4c0c6de34aa311b6b45ef6e.js'></script>.js';
+            socialBarScript.src = '//www.highperformancedformats.com/<script type='text/javascript' src='//pl27905276.effectivegatecpm.com/4f/30/0d/4f300dbaa4c0c6de34aa311b6b45ef6e.js'></script>/invoke.js';
             document.head.appendChild(socialBarScript);
-        
+            
+            // Smart Link Ad - Replace with your actual Adsterra Smart Link Ad ID
             const smartLinkAd = document.createElement('script');
             smartLinkAd.type = 'text/javascript';
             smartLinkAd.innerHTML = `
