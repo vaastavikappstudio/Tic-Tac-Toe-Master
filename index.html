@@ -2,16 +2,18 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>Tic Tac Toe Master</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700;800&family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1140300243242625" crossorigin="anonymous"></script>
     <style>
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
             font-family: 'Roboto', sans-serif;
+            -webkit-tap-highlight-color: transparent;
         }
         
         :root {
@@ -27,106 +29,40 @@
             --modal-bg: rgba(0, 0, 0, 0.9);
         }
         
-        body {
+        html, body {
+            height: 100%;
+            overflow: hidden;
             background-color: var(--primary);
             color: var(--text);
-            min-height: 100vh;
-            display: flex;
-            flex-direction: column;
-            overflow-x: hidden;
             background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
-            background-attachment: fixed;
+            touch-action: manipulation;
         }
         
         .container {
             width: 100%;
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 20px;
+            height: 100vh;
+            max-height: 100vh;
             display: flex;
             flex-direction: column;
-            min-height: 100vh;
             position: relative;
+            padding: 10px;
         }
 
-        /* Tablet and Desktop Layout */
-        @media (min-width: 768px) {
-            .container {
-                padding: 30px;
-            }
-            
-            .home-screen {
-                max-width: 600px;
-                margin: 0 auto;
-            }
-            
-            .game-screen {
-                max-width: 800px;
-                margin: 0 auto;
-                width: 100%;
-            }
-            
-            .game-board {
-                max-width: 600px;
-                margin: 30px auto;
-            }
-        }
-
-        /* Large Tablets and Small Desktops */
-        @media (min-width: 1024px) {
-            .container {
-                padding: 40px;
-            }
-            
-            .home-screen {
-                max-width: 700px;
-            }
-            
-            .game-screen {
-                max-width: 900px;
-            }
-            
-            .game-board {
-                max-width: 700px;
-            }
-        }
-
-        /* Large Desktops */
-        @media (min-width: 1440px) {
-            .container {
-                max-width: 1400px;
-                padding: 50px;
-            }
-            
-            .home-screen {
-                max-width: 800px;
-            }
-            
-            .game-screen {
-                max-width: 1000px;
-            }
-            
-            .game-board {
-                max-width: 800px;
-            }
-        }
-        
         /* Home Screen Styles */
         .home-screen {
             display: flex;
             flex-direction: column;
             align-items: center;
             justify-content: center;
-            flex: 1;
+            height: 100%;
             padding: 20px;
             text-align: center;
             position: relative;
             z-index: 10;
-            width: 100%;
         }
         
         .logo-container {
-            margin-bottom: 40px;
+            margin-bottom: 20px;
             position: relative;
         }
         
@@ -135,15 +71,15 @@
             top: 50%;
             left: 50%;
             transform: translate(-50%, -50%);
-            width: 200px;
-            height: 200px;
+            width: 150px;
+            height: 150px;
             background: radial-gradient(circle, rgba(255,193,7,0.2) 0%, rgba(255,193,7,0) 70%);
             border-radius: 50%;
             z-index: -1;
         }
         
         .title {
-            font-size: clamp(2.2rem, 5vw, 3.5rem);
+            font-size: 2.2rem;
             margin-bottom: 10px;
             background: linear-gradient(45deg, #FFC107, #FF9800);
             -webkit-background-clip: text;
@@ -157,8 +93,8 @@
         
         .subtitle {
             color: var(--text-secondary);
-            margin-bottom: 40px;
-            font-size: clamp(1rem, 2.5vw, 1.3rem);
+            margin-bottom: 30px;
+            font-size: 1rem;
         }
         
         .btn {
@@ -166,12 +102,12 @@
             color: var(--text);
             border: none;
             border-radius: 15px;
-            padding: clamp(16px, 4vw, 22px) clamp(24px, 5vw, 36px);
-            font-size: clamp(1.1rem, 3vw, 1.4rem);
+            padding: 16px 24px;
+            font-size: 1.1rem;
             font-weight: 600;
-            margin: 12px 0;
+            margin: 10px 0;
             width: 100%;
-            max-width: 400px;
+            max-width: 280px;
             cursor: pointer;
             transition: all 0.3s ease;
             box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
@@ -197,15 +133,6 @@
             z-index: -1;
         }
         
-        .btn:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.4);
-        }
-        
-        .btn:hover::before {
-            transform: translateX(0);
-        }
-        
         .btn:active {
             transform: translateY(2px);
         }
@@ -216,25 +143,21 @@
             font-weight: 700;
         }
         
-        .btn-accent:hover {
-            background: linear-gradient(45deg, #FFD54F, #FFB74D);
-        }
-        
         /* Game Screen Styles */
         .game-screen {
             display: none;
             flex-direction: column;
-            flex: 1;
+            height: 100%;
             position: relative;
             z-index: 10;
-            width: 100%;
         }
         
         .game-header {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            padding: 15px 0;
+            padding: 10px 0;
+            flex-shrink: 0;
         }
         
         .back-btn, .restart-btn {
@@ -242,8 +165,8 @@
             color: var(--text);
             border: none;
             border-radius: 12px;
-            padding: clamp(10px, 2.5vw, 14px) clamp(16px, 3vw, 22px);
-            font-size: clamp(0.9rem, 2.5vw, 1.1rem);
+            padding: 10px 16px;
+            font-size: 0.9rem;
             cursor: pointer;
             display: flex;
             align-items: center;
@@ -252,17 +175,12 @@
             box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
         }
         
-        .back-btn:hover, .restart-btn:hover {
-            background-color: #2D2D2D;
-            transform: translateY(-2px);
-        }
-        
         .game-status {
-            font-size: clamp(1.2rem, 4vw, 1.8rem);
+            font-size: 1.2rem;
             font-weight: 600;
             text-align: center;
-            padding: 20px 0;
-            min-height: 60px;
+            padding: 15px 0;
+            min-height: 50px;
             display: flex;
             align-items: center;
             justify-content: center;
@@ -271,76 +189,50 @@
             border-radius: 15px;
             margin: 10px 0;
             box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+            flex-shrink: 0;
+        }
+        
+        .game-board-container {
+            flex: 1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 10px 0;
         }
         
         .game-board {
             display: grid;
             grid-template-columns: repeat(3, 1fr);
-            grid-gap: clamp(10px, 3vw, 20px);
-            margin: 20px 0;
+            grid-gap: 10px;
             background: rgba(26, 26, 46, 0.7);
-            padding: clamp(15px, 4vw, 25px);
+            padding: 15px;
             border-radius: 20px;
             box-shadow: 0 8px 30px rgba(0, 0, 0, 0.3);
             position: relative;
             width: 100%;
-            max-width: 500px;
-            margin-left: auto;
-            margin-right: auto;
-        }
-
-        /* Tablet and Desktop Game Board Sizes */
-        @media (min-width: 768px) {
-            .game-board {
-                max-width: 600px;
-                grid-gap: 20px;
-                padding: 25px;
-            }
-        }
-
-        @media (min-width: 1024px) {
-            .game-board {
-                max-width: 700px;
-                grid-gap: 25px;
-                padding: 30px;
-            }
+            max-width: 350px;
+            aspect-ratio: 1/1;
         }
         
         .cell {
             background-color: var(--cell-bg);
             border-radius: 15px;
-            aspect-ratio: 1/1;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: clamp(2.5rem, 10vw, 5rem);
+            font-size: 2.5rem;
             font-weight: bold;
             cursor: pointer;
             transition: all 0.2s ease;
             box-shadow: 0 6px 15px rgba(0, 0, 0, 0.3);
             position: relative;
             overflow: hidden;
+            aspect-ratio: 1/1;
         }
         
-        .cell::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(255, 193, 7, 0.05);
-            opacity: 0;
-            transition: opacity 0.3s ease;
-        }
-        
-        .cell:hover {
+        .cell:active {
             background-color: var(--cell-hover);
-            transform: scale(1.03);
-        }
-        
-        .cell:hover::before {
-            opacity: 1;
+            transform: scale(0.95);
         }
         
         .cell.x {
@@ -353,21 +245,14 @@
             text-shadow: 0 0 15px rgba(33, 150, 243, 0.5);
         }
         
-        .win-line {
-            position: absolute;
-            background-color: var(--win-line);
-            z-index: 10;
-            transition: all 0.5s ease;
-            box-shadow: 0 0 15px rgba(255, 193, 7, 0.7);
-        }
-        
         /* Difficulty Selector */
         .difficulty-selector {
             display: flex;
             justify-content: center;
-            gap: clamp(10px, 2vw, 15px);
-            margin: 15px 0;
+            gap: 10px;
+            margin: 10px 0;
             flex-wrap: wrap;
+            flex-shrink: 0;
         }
         
         .difficulty-btn {
@@ -375,15 +260,11 @@
             color: var(--text);
             border: none;
             border-radius: 12px;
-            padding: clamp(10px, 2.5vw, 14px) clamp(16px, 3vw, 24px);
-            font-size: clamp(0.9rem, 2.5vw, 1.1rem);
+            padding: 10px 16px;
+            font-size: 0.9rem;
             cursor: pointer;
             transition: all 0.3s ease;
             box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
-        }
-        
-        .difficulty-btn:hover {
-            transform: translateY(-3px);
         }
         
         .difficulty-btn.active {
@@ -394,20 +275,17 @@
         
         /* Ad Containers */
         .ad-container {
-            margin-top: auto;
-            padding: 15px 0;
+            padding: 10px 0;
             width: 100%;
             display: flex;
             flex-direction: column;
             align-items: center;
-            gap: 15px;
+            gap: 10px;
+            flex-shrink: 0;
         }
         
-        .social-bar-ad {
+        .ad-slot {
             width: 100%;
-            max-width: 728px;
-            height: 90px;
-            margin: 0 auto;
             background: #1a1a2e;
             border-radius: 10px;
             display: flex;
@@ -420,21 +298,16 @@
             position: relative;
         }
         
-        .smart-link-ad {
+        .banner-ad {
             width: 100%;
             max-width: 320px;
-            height: 100px;
-            margin: 0 auto;
-            background: #1a1a2e;
-            border-radius: 10px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: var(--text-secondary);
-            font-weight: 500;
-            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
-            overflow: hidden;
-            position: relative;
+            height: auto;
+        }
+        
+        .rectangle-ad {
+            width: 100%;
+            max-width: 320px;
+            height: auto;
         }
         
         .ad-label {
@@ -458,31 +331,8 @@
         }
         
         .ad-icon {
-            font-size: 1.5rem;
+            font-size: 1.2rem;
             color: var(--accent);
-        }
-        
-        /* Mobile-specific ad styles */
-        @media (max-width: 767px) {
-            .social-bar-ad {
-                height: 70px;
-                max-width: 100%;
-            }
-            
-            .smart-link-ad {
-                height: 80px;
-                max-width: 300px;
-            }
-            
-            .ad-content {
-                flex-direction: column;
-                gap: 5px;
-                text-align: center;
-            }
-            
-            .ad-icon {
-                font-size: 1.2rem;
-            }
         }
         
         /* Results Modal */
@@ -498,15 +348,16 @@
             justify-content: center;
             align-items: center;
             backdrop-filter: blur(5px);
+            padding: 20px;
         }
         
         .modal-content {
             background: linear-gradient(135deg, #1e1e2a 0%, #252536 100%);
             border-radius: 20px;
-            padding: clamp(25px, 5vw, 40px) clamp(20px, 4vw, 30px);
+            padding: 25px 20px;
             text-align: center;
-            max-width: 90%;
-            width: clamp(300px, 80vw, 500px);
+            width: 100%;
+            max-width: 300px;
             box-shadow: 0 15px 40px rgba(0, 0, 0, 0.5);
             animation: modalIn 0.4s ease;
             border: 1px solid rgba(255, 193, 7, 0.2);
@@ -530,24 +381,43 @@
         }
         
         .modal-title {
-            font-size: clamp(1.8rem, 5vw, 2.5rem);
+            font-size: 1.8rem;
             margin-bottom: 15px;
             color: var(--accent);
             font-family: 'Montserrat', sans-serif;
         }
         
         .modal-message {
-            font-size: clamp(1rem, 3vw, 1.3rem);
-            margin-bottom: 30px;
+            font-size: 1rem;
+            margin-bottom: 25px;
             color: var(--text-secondary);
         }
         
         .modal-buttons {
             display: flex;
             justify-content: center;
-            gap: 15px;
+            gap: 10px;
             margin-top: 15px;
             flex-wrap: wrap;
+        }
+        
+        .modal-btn {
+            background-color: var(--secondary);
+            color: var(--text);
+            border: none;
+            border-radius: 12px;
+            padding: 12px 20px;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            flex: 1;
+            min-width: 120px;
+        }
+        
+        .modal-btn-accent {
+            background: linear-gradient(45deg, #FFC107, #FF9800);
+            color: #121212;
+            font-weight: 600;
         }
         
         /* Particles Background */
@@ -573,50 +443,116 @@
             100% { transform: translateY(-100vh) translateX(100px) rotate(360deg); }
         }
         
-        /* Landscape Orientation for Tablets */
-        @media (max-height: 600px) and (orientation: landscape) {
-            .home-screen {
-                padding: 10px 20px;
-            }
-            
-            .logo-container {
-                margin-bottom: 20px;
-            }
-            
+        /* Very small screens */
+        @media (max-height: 600px) {
             .title {
-                margin-bottom: 5px;
+                font-size: 1.8rem;
             }
             
             .subtitle {
+                font-size: 0.9rem;
                 margin-bottom: 20px;
             }
             
             .btn {
+                padding: 12px 20px;
+                font-size: 1rem;
                 margin: 8px 0;
-                padding: 12px 24px;
             }
             
             .game-status {
                 padding: 10px 0;
                 min-height: 40px;
-                margin: 5px 0;
+                font-size: 1rem;
             }
             
             .game-board {
-                margin: 10px 0;
-                padding: 15px;
+                max-width: 280px;
+                padding: 10px;
+                grid-gap: 8px;
+            }
+            
+            .cell {
+                font-size: 2rem;
             }
             
             .ad-container {
-                padding: 10px 0;
+                padding: 5px 0;
             }
             
-            .social-bar-ad {
+            .banner-ad {
                 height: 60px;
             }
             
-            .smart-link-ad {
+            .rectangle-ad {
                 height: 70px;
+            }
+        }
+        
+        /* Landscape mode adjustments */
+        @media (max-height: 500px) and (orientation: landscape) {
+            .home-screen {
+                padding: 10px 20px;
+                justify-content: flex-start;
+                padding-top: 20px;
+            }
+            
+            .logo-container {
+                margin-bottom: 10px;
+            }
+            
+            .title {
+                margin-bottom: 5px;
+                font-size: 1.5rem;
+            }
+            
+            .subtitle {
+                margin-bottom: 15px;
+                font-size: 0.8rem;
+            }
+            
+            .btn {
+                margin: 5px 0;
+                padding: 8px 16px;
+                font-size: 0.9rem;
+                max-width: 200px;
+            }
+            
+            .game-screen {
+                padding: 5px 0;
+            }
+            
+            .game-header {
+                padding: 5px 0;
+            }
+            
+            .game-status {
+                padding: 8px 0;
+                min-height: 35px;
+                margin: 5px 0;
+                font-size: 0.9rem;
+            }
+            
+            .game-board-container {
+                padding: 5px 0;
+            }
+            
+            .game-board {
+                max-width: 250px;
+                padding: 10px;
+                grid-gap: 5px;
+            }
+            
+            .cell {
+                font-size: 1.8rem;
+            }
+            
+            .difficulty-selector {
+                margin: 5px 0;
+            }
+            
+            .ad-container {
+                padding: 5px 0;
             }
         }
     </style>
@@ -630,7 +566,7 @@
         <div class="home-screen" id="homeScreen">
             <div class="logo-container">
                 <div class="logo-bg"></div>
-                <h1 class="title">Tic Tac Toe Master</h1>
+                <h1 class="title">Tic Tac Toe</h1>
             </div>
             <p class="subtitle">Outsmart your opponent in the ultimate strategy battle</p>
             
@@ -644,14 +580,14 @@
             
             <!-- Ad Container on Home Screen -->
             <div class="ad-container">
-                <!-- Smart Link Ad Container -->
-                <div class="smart-link-ad" id="smartLinkAdHome">
+                <!-- AdSense Rectangle Ad -->
+                <div class="ad-slot rectangle-ad" id="rectangleAdHome">
                     <span class="ad-label">Ad</span>
                     <div class="ad-content">
-                        <i class="fas fa-link ad-icon"></i>
+                        <i class="fas fa-ad ad-icon"></i>
                         <div>
-                            <div>Discover Amazing Games</div>
-                            <div style="font-size: 0.8rem;">Tap to explore</div>
+                            <div>Advertisement</div>
+                            <div style="font-size: 0.7rem;">AdSense Ad</div>
                         </div>
                     </div>
                 </div>
@@ -680,32 +616,22 @@
                 <button class="difficulty-btn" data-difficulty="hard">Hard</button>
             </div>
             
-            <div class="game-board" id="gameBoard">
-                <!-- Cells will be generated by JavaScript -->
+            <div class="game-board-container">
+                <div class="game-board" id="gameBoard">
+                    <!-- Cells will be generated by JavaScript -->
+                </div>
             </div>
             
             <!-- Ad Container on Game Screen -->
             <div class="ad-container">
-                <!-- Social Bar Ad Container -->
-                <div class="social-bar-ad" id="socialBarAd">
+                <!-- AdSense Banner Ad -->
+                <div class="ad-slot banner-ad" id="bannerAd">
                     <span class="ad-label">Ad</span>
                     <div class="ad-content">
-                        <i class="fas fa-gamepad ad-icon"></i>
+                        <i class="fas fa-ad ad-icon"></i>
                         <div>
-                            <div>Play More Strategy Games</div>
-                            <div style="font-size: 0.8rem;">Challenge your mind</div>
-                        </div>
-                    </div>
-                </div>
-                
-                <!-- Smart Link Ad Container -->
-                <div class="smart-link-ad" id="smartLinkAdGame">
-                    <span class="ad-label">Ad</span>
-                    <div class="ad-content">
-                        <i class="fas fa-trophy ad-icon"></i>
-                        <div>
-                            <div>Win Exciting Prizes</div>
-                            <div style="font-size: 0.8rem;">Tap to play</div>
+                            <div>Advertisement</div>
+                            <div style="font-size: 0.7rem;">AdSense Banner</div>
                         </div>
                     </div>
                 </div>
@@ -719,24 +645,41 @@
             <h2 class="modal-title" id="modalTitle">Player X Wins!</h2>
             <p class="modal-message" id="modalMessage">Congratulations on your victory!</p>
             <div class="modal-buttons">
-                <button class="btn" id="modalRestartBtn">Play Again</button>
-                <button class="btn btn-accent" id="modalHomeBtn">Back to Home</button>
+                <button class="modal-btn" id="modalRestartBtn">Play Again</button>
+                <button class="modal-btn modal-btn-accent" id="modalHomeBtn">Back to Home</button>
             </div>
         </div>
     </div>
+
+    <!-- AdSense Ad Units -->
+    <!-- Banner Ad -->
+    <ins class="adsbygoogle"
+         style="display:block"
+         data-ad-client="ca-pub-1140300243242625"
+         data-ad-slot="6956973392"
+         data-ad-format="auto"
+         data-full-width-responsive="true"></ins>
+    
+    <!-- Rectangle Ad 1 -->
+    <ins class="adsbygoogle"
+         style="display:block"
+         data-ad-client="ca-pub-1140300243242625"
+         data-ad-slot="3583692833"
+         data-ad-format="auto"
+         data-full-width-responsive="true"></ins>
 
     <script>
         // Initialize particles
         function initParticles() {
             const particlesContainer = document.getElementById('particles');
-            const particleCount = 30;
+            const particleCount = 20;
             
             for (let i = 0; i < particleCount; i++) {
                 const particle = document.createElement('div');
                 particle.classList.add('particle');
                 
                 // Random size
-                const size = Math.random() * 20 + 5;
+                const size = Math.random() * 15 + 5;
                 particle.style.width = `${size}px`;
                 particle.style.height = `${size}px`;
                 
@@ -820,7 +763,7 @@
             
             // AI move in single player mode
             if (gameState.gameMode === 'single' && gameState.currentPlayer === 'O' && gameState.gameActive) {
-                setTimeout(makeAIMove, 600);
+                setTimeout(makeAIMove, 500);
             }
         }
         
@@ -1086,49 +1029,27 @@
         initBoard();
         initParticles();
         
-        // Adsterra Ads Integration
-        function loadAdsterraAds() {
-            // Social Bar Ad - Replace with your actual Adsterra Social Bar Ad ID
-            const socialBarAd = document.createElement('script');
-            socialBarAd.type = 'text/javascript';
-            socialBarAd.innerHTML = `
-                atOptions = {
-                    'key' : '<script type='text/javascript' src='//pl27905276.effectivegatecpm.com/4f/30/0d/4f300dbaa4c0c6de34aa311b6b45ef6e.js'></script>', // Replace with your actual Adsterra Social Bar Ad ID
-                    'format' : 'iframe',
-                    'height' : 90,
-                    'width' : 728,
-                    'params' : {}
-                };
-            `;
-            document.head.appendChild(socialBarAd);
-            
-            const socialBarScript = document.createElement('script');
-            socialBarScript.type = 'text/javascript';
-            socialBarScript.src = '//www.highperformancedformats.com/<script type='text/javascript' src='//pl27905276.effectivegatecpm.com/4f/30/0d/4f300dbaa4c0c6de34aa311b6b45ef6e.js'></script>/invoke.js';
-            document.head.appendChild(socialBarScript);
-            
-            // Smart Link Ad - Replace with your actual Adsterra Smart Link Ad ID
-            const smartLinkAd = document.createElement('script');
-            smartLinkAd.type = 'text/javascript';
-            smartLinkAd.innerHTML = `
-                atOptions = {
-                    'key' : 'https://www.effectivegatecpm.com/wqc66wj1ef?key=bfd46e317ce2cef1a909c83de4b78bd0', // Replace with your actual Adsterra Smart Link Ad ID
-                    'format' : 'iframe',
-                    'height' : 100,
-                    'width' : 320,
-                    'params' : {}
-                };
-            `;
-            document.head.appendChild(smartLinkAd);
-            
-            const smartLinkScript = document.createElement('script');
-            smartLinkScript.type = 'text/javascript';
-            smartLinkScript.src = '//www.highperformancedformats.com/https://www.effectivegatecpm.com/wqc66wj1ef?key=bfd46e317ce2cef1a909c83de4b78bd0/invoke.js';
-            document.head.appendChild(smartLinkScript);
+        // AdSense Ads Integration
+        function loadAdSenseAds() {
+            // Initialize AdSense ads
+            (adsbygoogle = window.adsbygoogle || []).push({});
         }
         
         // Load ads after page is fully loaded
-        window.addEventListener('load', loadAdsterraAds);
+        window.addEventListener('load', loadAdSenseAds);
+        
+        // Prevent scrolling on mobile
+        document.addEventListener('touchmove', function(e) {
+            e.preventDefault();
+        }, { passive: false });
+        
+        // Handle orientation changes
+        window.addEventListener('orientationchange', function() {
+            // Force a resize event to trigger layout adjustments
+            setTimeout(function() {
+                window.dispatchEvent(new Event('resize'));
+            }, 200);
+        });
     </script>
 </body>
 </html>
